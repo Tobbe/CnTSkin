@@ -81,12 +81,10 @@ LRESULT CALLBACK NewWndProc2(HWND Hwnd, UINT Message, WPARAM wParam, LPARAM lPar
 			break;
 		case WM_PAINT: {
 			PAINTSTRUCT ps;
-			HDC hdcPaint = BeginPaint(Hwnd, &ps);
+			BeginPaint(Hwnd, &ps);
 			HBRUSH brush = CreateSolidBrush(RGB(255, 255, 255));
 
-			RECT r;
-			GetClientRect(Hwnd, &r);
-			FillRect(hdcPaint, &r, brush);
+			FillRect(ps.hdc, &ps.rcPaint, brush);
 
 			DeleteObject(brush);
 			EndPaint(Hwnd, &ps);
